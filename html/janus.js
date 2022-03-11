@@ -393,11 +393,11 @@ Janus.init = function(options) {
 		if(Janus.webRTCAdapter.browserDetails.browser === 'firefox' &&
 				Janus.webRTCAdapter.browserDetails.version >= 59) {
 			// Firefox definitely does, starting from version 59
-			Janus.unifiedPlan = true;
+			Janus.unifiedPlan = false;
 		} else if(Janus.webRTCAdapter.browserDetails.browser === 'chrome' &&
 				Janus.webRTCAdapter.browserDetails.version >= 72) {
 			// Chrome does, but it's only usable from version 72 on
-			Janus.unifiedPlan = true;
+			Janus.unifiedPlan = false;
 		} else if(!window.RTCRtpTransceiver || !('currentDirection' in RTCRtpTransceiver.prototype)) {
 			// Safari supports addTransceiver() but not Unified Plan when
 			// currentDirection is not defined (see codepen above).
@@ -407,7 +407,7 @@ Janus.init = function(options) {
 			var tempPc = new RTCPeerConnection();
 			try {
 				tempPc.addTransceiver('audio');
-				Janus.unifiedPlan = true;
+				Janus.unifiedPlan = false;
 			} catch (e) {}
 			tempPc.close();
 		}
